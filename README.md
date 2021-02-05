@@ -3,20 +3,25 @@
 ## Abstract
 Disentanglement is a useful property in representation learning which increases the interpretability of generative models such as Variational Auto-Encoders (VAE), Generative Adversarial Models, and their many variants. Typically in such models, an increase in disentanglement performance is traded-off with generation quality. In the context of latent space models, this work presents a representation learning framework that explicitly promotes disentanglement by encouraging orthogonal directions of variations. The proposed objective is the sum of an auto-encoder error term along with a Principal Component Analysis reconstruction error in the feature space. This has an interpretation of a Restricted Kernel Machine with an interconnection matrix on the Stiefel manifold. Our analysis shows that such a construction promotes disentanglement by matching the principal directions in latent space with the directions of orthogonal variation in data space. The training algorithm involves a stochastic optimization method on the Stiefel manifold, which increases only marginally the computing time compared to an analogous VAE. Our theoretical discussion and various experiments show that the proposed model improves over many VAE variants in terms of both generation quality and disentangled representation learning.
 
-[paper](https://arxiv.org/abs/2006.07046)
+[Link](https://arxiv.org/abs/2006.07046)
+
+<p align="center">
+<img src="figs/schematic_diagram.png" alt="Schematic illustration of St-RKM training problem" title="Schematic illustration of St-RKM training problem" width="700" style="horizontal-align:middle"/>
+</p>
+*Figure*: Schematic illustration of St-RKM training problem.  The length of the dashed line represents the  reconstruction  error  (see  Auto-Encoder  term  in (St-RKM))  and  the  length  of  the  vector  projecting on hyperplane represents the PCA reconstruction error.  After training, the projected points tend to be distributed normally on the hyperplane.
 
 ## Usage
 After downloading the repository, navigate to the folder and install required python packages with the provided rkm_env.yml file as follows.
 
-### Install packages in conda enviornment
-Run the following in terminal. This will create a conda envionment named 'rkm_env'.
+### Install packages in conda environment
+Run the following in terminal. This will create a conda environment named 'rkm_env'.
 
 ```
 conda env create -f rkm_env.yml
 ```
 
 ### Train
-Activate the conda enviornment `conda activate rkm_env` and run one of the following commands, for example:
+Activate the conda environment `conda activate rkm_env` and run one of the following commands, for example:
 ```
 python train_rkm.py --dataset_name mnist --h_dim 10 --loss deterministic --max_epochs 1000
 python train_rkm.py --dataset_name dsprites --h_dim 5 --loss splitloss --max_epochs 1000
